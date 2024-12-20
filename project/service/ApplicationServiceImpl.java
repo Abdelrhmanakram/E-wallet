@@ -14,25 +14,29 @@ public class ApplicationServiceImpl implements ApplicationService {
 
     @Override
     public void run() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Welcome Sir");
+        int flag =0 ;
+        while(true) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Welcome Sir");
 
-        System.out.println("Please Enter your choose");
-        System.out.println();
-        System.out.println("a.login     b.signup   c.exit");
-        char choose = scanner.next().charAt(0);
-        switch (choose) {
-            case 'a':
-                login(new Account());
-                break;
-            case 'b':
-                signup();
-                break;
-            case 'c':
-                System.out.println("you are welcome.");
-                break;
-            default:
-                System.out.println("Invalid Choose");
+            System.out.println("Please Enter your choose");
+            System.out.println();
+            System.out.println("a.login     b.signup   c.exit");
+            char choose = scanner.next().charAt(0);
+            switch (choose) {
+                case 'a':
+                    login(new Account());
+
+                case 'b':
+                    signup();
+
+                case 'c':
+                    System.out.println("you are welcome.");
+                    flag=1;
+                    break;
+                default:
+                    System.out.println("Invalid Choose");
+            }
         }
     }
 
@@ -73,7 +77,6 @@ public class ApplicationServiceImpl implements ApplicationService {
         System.out.println("Please Enter password");
         String password = scanner.nextLine();
 
-        AccountServiceImpl accountService = new AccountServiceImpl(ewallet);
         if (accountService.loginAccount(new Account(name, password))) {
             accountServices(ewallet.findAccount(name));
             System.out.println("Login successful!");
